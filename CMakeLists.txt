@@ -43,6 +43,9 @@ endif()
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
 add_executable(${PROJECT_NAME} main.cpp)
 
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/headers/")
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+
 ###############################################################################
 
 # target definitions
@@ -123,4 +126,4 @@ endif()
 # copy binaries to bin folder; these are uploaded as artifacts on each release
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 # install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
-# install(FILES some_file1.txt some_file2.md DESTINATION bin)
+# install(FILES database.txt DESTINATION bin)
