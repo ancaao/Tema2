@@ -6,11 +6,13 @@
 #define MAIN_CPP_LIBRARY_H
 
 #include "Book.h"
+#include "Client.h"
 #include <algorithm>
 
 class Library{
     std::string name;
     std::vector<Book> books;
+    std::vector<Client> clients;
 public:
     Library() = default;
     ~Library() = default;
@@ -21,11 +23,56 @@ public:
         auto title_match_fn = [title](auto book) {
             return book.getTitle() == title;
         };
+
         auto it = find_if(begin(books), end(books), title_match_fn);
-        if (it == end(books)) std::cout << "Book unavailable\n";
+        if (it == end(books)) {
+            std::cout << "Book unavailable\n";
+        }
         else std::cout << "Book available\n";
         return it;
     }
+
+    std::vector <Book> find_by_word(const std::string& word){
+        std::vector<Book> list;
+        std::string word_lower_case;
+        std::transform(word.begin(), word.end(), word_lower_case.begin(), ::tolower);
+
+        auto word_match_fn = [word](auto book) {
+            std::string author_name = book.getAuthor().getName();
+            std::transform(author_name.begin(), author_name.end(), author_name.begin(), ::tolower);
+
+            size_t found = author_name.find(word);
+            if( found != std::string::npos)
+                return true;
+
+            std::string title = book.getTitle();
+            std::transform(title.begin(), title.end(), title.begin(), ::tolower);
+
+            found = title.find(word);
+            if( found != std::string::npos)
+                return true;
+            return false;
+        };
+
+        auto it = begin(books);
+
+        while (it != end(books)) {
+            it = find_if(it, end(books), word_match_fn);
+
+            if (it != end(books)) {
+                list.push_back(*it);
+                it++;
+            }
+        }
+
+        if (list.empty()) {
+            std::cout << "Books not found\n";
+        }
+
+        return list;
+    }
+
+    void get_details(Client* client);
 
     std::vector<Book> filter_by_genre(Genre genre) const;
 

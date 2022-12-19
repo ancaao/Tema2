@@ -7,16 +7,35 @@ std::string Book::getTitle() const { return title; }
 
 Genre Book::getGenre() const { return genre; }
 
-//constr de init/param
-Book::Book(const std::string& title_, const Author& author_, const Publisher& publisher_,float price_,
+double Book::getPrice() const { return price; }
+
+Publisher Book::getPublisher() const { return publisher; }
+
+Book::Book(const std::string& title_, const Author& author_, const Publisher& publisher_,double price_,
      const Genre& genre_, int year_) : title{title_}, author{author_},
                                        publisher{publisher_},
                                        price{price_}, genre{genre_},
-                                       year{year_} {}
+                                       year{year_} {
+
+    time_t t = time(nullptr);
+    std::tm *const pTInfo = localtime(&t);
+
+    int CurrentYear = 1900 + pTInfo->tm_year;
+
+    if(year > CurrentYear)
+        throw WrongYear();
+
+    if(static_cast<int>(genre) <=0 && static_cast<int>(genre) >=4)
+        throw WrongGenre();
+}
 
 std::ostream& operator<<(std::ostream& os, const Book& book) {
     os << "Title: " << book.title << ", Author - " << book.author <<
        "Publisher - " << book.publisher.getName() << ", Price: " << book.price <<
        ", Genre: " << static_cast<int>(book.genre) << ", Year: " << book.year << "\n";
     return os;
+}
+
+const Author &Book::getAuthor() const {
+    return author;
 }

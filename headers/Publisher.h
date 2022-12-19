@@ -21,6 +21,7 @@ public:
     std::string getName() const;
 
     Publisher(const std::string& name_, const std::vector<Author>& authors_);
+
 /*    Publisher(const Publisher& other) : name{other.name},authors{other.authors}  {
         std::cout << "Constr de copiere Publisher\n";
     }*/
@@ -30,6 +31,7 @@ public:
         authors = other.authors;
         return *this;
     }*/
+
     friend std::ostream& operator<<(std::ostream& os, const Publisher& publisher);
 };
 #endif //MAIN_CPP_PUBLISHER_H

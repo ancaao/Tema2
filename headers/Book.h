@@ -6,8 +6,9 @@
 #define MAIN_CPP_BOOK_H
 
 #include<iostream>
-//#include "Author.h"
+#include<ctime>
 #include "Publisher.h"
+#include "BookException.h"
 
 enum class Genre{Fiction, Nonfiction, Drama, Poetry, Folktale};
 
@@ -17,7 +18,7 @@ protected:
     std::string title;
     Author author;
     Publisher publisher;
-    float price;
+    double price;
     Genre genre;
     int year;
 public:
@@ -25,9 +26,12 @@ public:
     ~Book() = default;
 
     std::string getTitle() const;
+    const Author &getAuthor() const;
     Genre getGenre() const;
+    double getPrice() const;
+    Publisher getPublisher() const;
 
-    Book(const std::string& title_, const Author& author_, const Publisher& publisher_,float price_,
+    Book(const std::string& title_, const Author& author_, const Publisher& publisher_,double price_,
          const Genre& genre_, int year_);
 
     friend std::ostream& operator<<(std::ostream& os, const Book& book);
