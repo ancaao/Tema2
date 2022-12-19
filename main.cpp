@@ -23,13 +23,13 @@ void read_Author(std::ifstream &fauthor, std::vector<Author> &authors){
         std::getline(fauthor, name, ',');
         std::getline(fauthor, gender, ',');
         std::getline(fauthor, nationality, '\n');
+        if(fauthor.eof()) break;
+
         try{
-            for(auto & i : authors) i;
+            authors.emplace_back(name, gender, nationality);
         } catch (AuthorException &error) {
             std::cout << error.what() << '\n';
         }
-        if(fauthor.eof()) break;
-        authors.emplace_back(name, gender, nationality);
     }
 //    for(auto & i : author) std::cout  << i << "\n";
 }
