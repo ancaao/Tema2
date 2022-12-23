@@ -9,7 +9,7 @@
 
 class BookException : public std::runtime_error {
 public:
-    BookException(const std::string &arg);
+    explicit BookException(const std::string &arg);
 };
 
 class WrongYear : public BookException {

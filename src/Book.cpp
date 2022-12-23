@@ -25,7 +25,7 @@ Book::Book(const std::string& title_, const Author& author_, const Publisher& pu
     if(year > CurrentYear)
         throw WrongYear();
 
-    if(static_cast<int>(genre) <=0 && static_cast<int>(genre) >=4)
+    if(genre <= Genre::MIN || genre >= Genre::MAX)
         throw WrongGenre();
 }
 

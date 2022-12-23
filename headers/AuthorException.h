@@ -9,7 +9,7 @@
 
 class AuthorException : public std::runtime_error {
 public:
-    AuthorException(const std::string &arg);
+    explicit AuthorException(const std::string &arg);
 };
 
 class WrongGender : public AuthorException {

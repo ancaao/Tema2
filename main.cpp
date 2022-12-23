@@ -1,5 +1,6 @@
 #include<fstream>
 #include<map>
+#include<string>
 #include "src/Author.cpp"
 #include "src/Publisher.cpp"
 #include "src/Book.cpp"

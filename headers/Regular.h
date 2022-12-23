@@ -8,7 +8,7 @@
 
 class Regular: public Client{
 public:
-    Regular(const std::string& name);
+    explicit Regular(const std::string& name);
     ~Regular() = default;
 
     std::shared_ptr<Client> clone() const override;

@@ -10,7 +10,7 @@
 #include "Publisher.h"
 #include "BookException.h"
 
-enum class Genre{Fiction, Nonfiction, Drama, Poetry, Folktale};
+enum class Genre{MIN, Fiction, Nonfiction, Drama, Poetry, Folktale, MAX};
 
 class Book{
 protected:
