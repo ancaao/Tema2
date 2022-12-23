@@ -10,6 +10,10 @@ void Library::add_book(const Book& book){
     books.push_back(book);
 }
 
+void Library::add_client(const Client& client){
+    clients.push_back(client.clone());
+}
+
 std::vector<Book> Library::filter_by_genre(Genre genre) const {
     std::vector<Book> new_books;
     auto genre_match_fn = [genre](auto book) {
@@ -44,6 +48,15 @@ void Library::get_details(Client* client){
     }
 
     std::cout<< "Valoare cumparaturilor este in valoare de " << client->get_total() << std::endl;
+}
+
+double Library::get_total_sales() {
+    double sum = 0.0;
+    for (auto &client : clients) {
+        sum += client->get_total();
+    }
+
+    return sum;
 }
 
 Library::Library(const std::string& name_, const std::vector<Book>& books_) : name{name_}, books{books_} {}

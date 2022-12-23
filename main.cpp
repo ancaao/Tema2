@@ -140,18 +140,22 @@ int main() {
 
     Regular normal("Mihai");
     normal.add_to_cart(*carturesti.find("Ion"));
+    carturesti.add_client(normal);
 
     Student de_la_poli("mmmm");
     de_la_poli.add_to_cart(*carturesti.find("Cartile junglei"));
     de_la_poli.add_to_cart(*carturesti.find("Povestea lui Harap-Alb"));
+    carturesti.add_client(de_la_poli);
 
     NGO ASMI("ASMI", 250);
     ASMI.add_to_cart(*carturesti.find("Jack si vrejul de fasole"));
+    carturesti.add_client(ASMI);
 
     Retiree baba("Monica");
     baba.add_to_cart(*carturesti.find("Jack si vrejul de fasole"));
     baba.add_to_cart(*carturesti.find("Jack si vrejul de fasole"));
     baba.add_to_cart(*carturesti.find("Jack si vrejul de fasole"));
+    carturesti.add_client(baba);
 
     std::cout << "Totalul de plata pentru client: " << normal.get_total() << std::endl;
     std::cout << "Totalul de plata pentru student: " << de_la_poli.get_total() << std::endl;
@@ -159,8 +163,13 @@ int main() {
     std::cout << "Totalul de plata pentru pensionar: " <<baba.get_total() <<std::endl;
 
     carturesti.get_details(&ASMI);
+
     std::vector<Book> books_ = carturesti.find_by_word("ion");
+    std::cout << "Cartile care contin sirul de caractere introdus sunt: \n";
     for(auto & i : books_) std::cout  << i << "\n";
+
+    double total_sales = carturesti.get_total_sales();
+    std::cout << total_sales << std::endl;
 
 /*
     Author eminescu("Mihai Eminescu", "male", "romanian");
