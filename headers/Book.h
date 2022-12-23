@@ -18,9 +18,9 @@ protected:
     std::string title;
     Author author;
     Publisher publisher;
-    double price;
-    Genre genre;
-    int year;
+    double price{};
+    Genre genre{};
+    int year{};
 public:
     Book() = default;
     ~Book() = default;
@@ -31,7 +31,7 @@ public:
     double getPrice() const;
     Publisher getPublisher() const;
 
-    Book(const std::string& title_, const Author& author_, const Publisher& publisher_,double price_,
+    Book(const std::string& title_, const Author& author_, const Publisher& publisher_, double price_,
          const Genre& genre_, int year_);
 
     friend std::ostream& operator<<(std::ostream& os, const Book& book);

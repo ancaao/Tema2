@@ -91,6 +91,7 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
             std::getline(fbook, aux, ',');
             genre = pairs.at(aux);
         }catch(const std::out_of_range& e){
+            (void)e;
             throw WrongGender();
         }
 
