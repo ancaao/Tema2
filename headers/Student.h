@@ -10,6 +10,7 @@ class Student: public Client{
 
 public:
     explicit Student(const std::string& name);
+    ~Student() = default;
 
     std::shared_ptr<Client> clone() const override;
 

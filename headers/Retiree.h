@@ -9,7 +9,7 @@
 class Retiree: public Client{
 public:
     explicit Retiree(const std::string& name);
-
+    ~Retiree() = default;
     std::shared_ptr<Client> clone() const override;
 
     Retiree& operator=(Retiree other);
