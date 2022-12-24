@@ -157,12 +157,12 @@ int main() {
     baba.add_to_cart(*carturesti.find("Jack si vrejul de fasole"));
     carturesti.add_client(baba);
 
+    carturesti.get_details(&ASMI);
+
     std::cout << "Totalul de plata pentru client: " << normal.get_total() << std::endl;
     std::cout << "Totalul de plata pentru student: " << de_la_poli.get_total() << std::endl;
     std::cout << "Totalul de plata pentru ONG: " << ASMI.get_total() << std::endl;
     std::cout << "Totalul de plata pentru pensionar: " <<baba.get_total() <<std::endl;
-
-    carturesti.get_details(&ASMI);
 
     std::cout << "find_by_wrd\n";
     std::vector<Book> books_ = carturesti.find_by_word("ion");
