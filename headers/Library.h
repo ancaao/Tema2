@@ -37,9 +37,11 @@ public:
     std::vector <Book> find_by_word(const std::string& word){
         std::vector<Book> list;
         std::string word_lower_case;
+        std::cout << "transform word\n";
         std::transform(word.begin(), word.end(), word_lower_case.begin(), ::tolower);
 
         auto word_match_fn = [word](auto book) {
+            std::cout << "word match\n";
             std::string author_name = book.getAuthor().getName();
             std::transform(author_name.begin(), author_name.end(), author_name.begin(), ::tolower);
 
@@ -56,6 +58,7 @@ public:
             return false;
         };
 
+        std::cout << "it= begin\n";
         auto it = begin(books);
 
         while (it != end(books)) {
