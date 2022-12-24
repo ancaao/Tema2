@@ -6,10 +6,6 @@
 #include "../headers/NGO.h"
 #include "../headers/Retiree.h"
 
-void Library::add_book(const Book& book){
-    books.push_back(book);
-}
-
 void Library::add_client(const Client& client){
     clients.push_back(client.clone());
 }
@@ -21,12 +17,6 @@ std::vector<Book> Library::filter_by_genre(Genre genre) const {
     };
     copy_if(begin(books), end(books), std::back_inserter(new_books), genre_match_fn);
     return new_books;
-}
-
-void Library::remove_book(const std::string& title){
-    auto it = find(title);
-    if(it != books.end()) books.erase(it);
-    else std::cout << "Book not found!\n";
 }
 
 std::ostream& operator<<(std::ostream& os, const Library& library) {

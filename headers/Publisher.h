@@ -16,8 +16,6 @@ public:
     Publisher() = default;
     ~Publisher() = default;
 
-    void add_author(const Author& author);
-
     std::string getName() const;
 
     Publisher(const std::string& name_, const std::vector<Author>& authors_);

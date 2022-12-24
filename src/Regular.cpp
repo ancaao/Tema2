@@ -20,7 +20,7 @@ void swap(Regular& regular1, Regular& regular2) {
 }
 
 double Regular::get_total() {
-    auto sum = [](const float& accumulator, Book& book){
+    auto sum = [](const float& accumulator, const Book& book){
         return accumulator + book.getPrice();
     };
     return std::accumulate(this->books.begin(), this->books.end(), 0.0f, sum);

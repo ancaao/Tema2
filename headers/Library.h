@@ -17,9 +17,7 @@ public:
     Library() = default;
     ~Library() = default;
 
-    void add_book(const Book& book);
     void add_client(const Client& client);
-
 
     auto find(const std::string& title) const {
         auto title_match_fn = [title](auto book) {
@@ -78,8 +76,6 @@ public:
     double get_total_sales();
 
     std::vector<Book> filter_by_genre(Genre genre) const;
-
-    void remove_book(const std::string& title);
 
     Library(const std::string& name_, const std::vector<Book>& books_);
 

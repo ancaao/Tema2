@@ -20,7 +20,7 @@ void swap(Student& student1, Student& student2) {
 }
 
 double Student::get_total()  {
-    auto sum = [](const double& accumulator, Book& book){
+    auto sum = [](const double& accumulator, const Book& book){
         double book_price = book.getPrice();
 
         double discount = 1;

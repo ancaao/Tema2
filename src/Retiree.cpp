@@ -20,7 +20,7 @@ void swap(Retiree& retiree1, Retiree& retiree2) {
 }
 
 double Retiree::get_total()  {
-    auto sum = [this](const double& accumulator, Book& book){
+    auto sum = [this](const double& accumulator, const Book& book){
         double book_price = book.getPrice();
         int n = books.size();
         double discount = 1;

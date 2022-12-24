@@ -168,33 +168,11 @@ int main() {
     for(auto const & i : books_) std::cout  << i << "\n";
 
     double total_sales = carturesti.get_total_sales();
-    std::cout << total_sales << std::endl;
+    std::cout << total_sales << "\n\n";
 
-/*
-    Author eminescu("Mihai Eminescu", "male", "romanian");
-    Author creanga("Ion Creanga", "male", "romanian");
-    Author braniste("Lavinia Braniste", "female", "romanian");
-
-    Publisher nemira("Nemira", {eminescu});
-    nemira.add_author(braniste);
-
-    Book b1("Luceafarul", eminescu, nemira, 32.8, Genre::Poetry, 1987);
-    Book b2("Ion", braniste, nemira, 32.8, Genre::Fiction, 1987);
-    Book b3("Poesii", eminescu, nemira, 22, Genre::Poetry, 1883);
-
-
-    Library l("lalala", {b1});
-    l.add_book(b2);
-    l.find("Ion");
-*/
-
-/*
-    std::vector<Book> Fiction_books = l.filter_by_genre(Genre::Fiction);
-    for (const Book& book: Fiction_books) std::cout << book <<" ";
-
-    l.remove_book("Ion");
-    l.remove_book("Iona");
-*/
+    std::cout << "Cartile gasite din genul cautat sunt: " << std::endl;
+    std::vector<Book> Fiction_books = carturesti.filter_by_genre(Genre::Fiction);
+    for (const Book& book: Fiction_books) std::cout << book <<"\n";
 
     return 0;
 }

@@ -22,7 +22,7 @@ void swap(NGO& ngo1, NGO& ngo2) {
 }
 
 double NGO::get_total()  {
-    auto sum = [this](const double& accumulator, Book& book){
+    auto sum = [this](const double& accumulator, const Book& book){
         double book_price = book.getPrice();
         double discount;
         if (0 < volunteers && volunteers < 50) {

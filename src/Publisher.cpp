@@ -3,10 +3,6 @@
 //
 #include "../headers/Publisher.h"
 
-void Publisher::add_author(const Author& author){
-    authors.push_back(author);
-}
-
 std::string Publisher::getName() const { return name; }
 
 Publisher::Publisher(const std::string& name_, const std::vector<Author>& authors_): name{name_}, authors{authors_} {}
