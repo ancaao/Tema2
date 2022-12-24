@@ -164,7 +164,7 @@ int main() {
 
     carturesti.get_details(&ASMI);
 
-    std::cout << "find_by_word\n";
+    std::cout << "find_by_wrd\n";
     std::vector<Book> books_ = carturesti.find_by_word("ion");
     std::cout << "Cartile care contin sirul de caractere introdus sunt: \n";
     for(auto & i : books_) std::cout  << i << "\n";
