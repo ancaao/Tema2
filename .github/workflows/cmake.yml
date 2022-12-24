@@ -406,12 +406,12 @@ jobs:
         run: |
           ./bin/"${EXECUTABLE_NAME}"
 
-      - name: Sanitizers (Windows MSVC)
-        # run one sanitizer for each OS to avoid building extra binaries
-        if: matrix.cxx == 'cl'
-        continue-on-error: true
-        run: |
-          ./bin/"${EXECUTABLE_NAME}".exe
+#      - name: Sanitizers (Windows MSVC)
+#        # run one sanitizer for each OS to avoid building extra binaries
+#        if: matrix.cxx == 'cl'
+#        continue-on-error: true
+#        run: |
+#          ./bin/"${EXECUTABLE_NAME}".exe
 
       # Application Verifier does not work with sanitizers, need separate executable
       #- name: Application Verifier (Windows MSVC)
