@@ -35,6 +35,7 @@ public:
     }
 
     std::vector <Book> find_by_word(const std::string& word){
+        std::cout << "find_by_Word begin\n";
         std::vector<Book> list;
         std::string word_lower_case;
         std::cout << "transform word\n";
