@@ -1,17 +1,17 @@
 #include<fstream>
 #include<map>
 #include<string>
-#include "src/Author.cpp"
-#include "src/Publisher.cpp"
-#include "src/Book.cpp"
-#include "src/Library.cpp"
-#include "src/Client.cpp"
-#include "src/Student.cpp"
-#include "src/NGO.cpp"
-#include "src/Retiree.cpp"
-#include "src/AuthorException.cpp"
-#include "src/BookException.cpp"
-#include "src/Regular.cpp"
+#include "headers/Author.h"
+#include "headers/Publisher.h"
+#include "headers/Book.h"
+#include "headers/Library.h"
+#include "headers/Client.h"
+#include "headers/Student.h"
+#include "headers/NGO.h"
+#include "headers/Retiree.h"
+#include "headers/AuthorException.h"
+#include "headers/BookException.h"
+#include "headers/Regular.h"
 
 
 void read_Author(std::ifstream &fauthor, std::vector<Author> &authors){
@@ -19,19 +19,21 @@ void read_Author(std::ifstream &fauthor, std::vector<Author> &authors){
 
     fauthor.open ("database/authors.in");
     if (!fauthor.is_open()) std::cerr << "Error in opening the file" << std::endl;
+    else{
+        while(fauthor.good()){
+            std::getline(fauthor, name, ',');
+            std::getline(fauthor, gender, ',');
+            std::getline(fauthor, nationality, '\n');
+            if(fauthor.eof()) break;
 
-    while(true){
-        std::getline(fauthor, name, ',');
-        std::getline(fauthor, gender, ',');
-        std::getline(fauthor, nationality, '\n');
-        if(fauthor.eof()) break;
-
-        try{
-            authors.emplace_back(name, gender, nationality);
-        } catch (AuthorException &error) {
-            std::cout << error.what() << '\n';
+            try{
+                authors.emplace_back(name, gender, nationality);
+            } catch (AuthorException &error) {
+                std::cout << error.what() << '\n';
+            }
         }
     }
+
 //    for(auto & i : author) std::cout  << i << "\n";
 }
 
@@ -42,28 +44,31 @@ void read_Publisher(std::ifstream &fpublisher, std::vector<Publisher> &publisher
 
     fpublisher.open ("database/publishers.in");
     if (!fpublisher.is_open()) std::cerr << "Error in opening the file" << std::endl;
-    while(!fpublisher.eof()){
-        std::getline(fpublisher, name, ',');
+    else{
+        while(fpublisher.good()){
+            std::getline(fpublisher, name, ',');
 //        std::cout << "name: " << name << std::endl;
-        std::getline(fpublisher, buffer, ',');
+            std::getline(fpublisher, buffer, ',');
 //        std::cout << "nr: " << buffer << std::endl;
-        authors_count = std::stoi(buffer);
+            authors_count = std::stoi(buffer);
 
-        while(authors_count) {
-            if (authors_count != 1) {
-                std::getline(fpublisher, author_name, ',');
-            } else {
-                std::getline(fpublisher, author_name, '\n');
-            }
+            while(authors_count) {
+                if (authors_count != 1) {
+                    std::getline(fpublisher, author_name, ',');
+                } else {
+                    std::getline(fpublisher, author_name, '\n');
+                }
 //            std::cout << "author: " << author_name << std::endl;
-            author_names.push_back(author_name);
-            authors_count--;
-        }
-        publishers.push_back(Publisher(name, Author::get_authors_by_name(authors_list, author_names)));
-        if(fpublisher.eof()) break;
+                author_names.push_back(author_name);
+                authors_count--;
+            }
+            publishers.push_back(Publisher(name, Author::get_authors_by_name(authors_list, author_names)));
+            if(fpublisher.eof()) break;
 
-        author_names.clear();
+            author_names.clear();
+        }
     }
+
     for(auto & i : publishers) std::cout  << i << "\n";
 }
 
@@ -76,50 +81,45 @@ void read_book(std::ifstream &fbook, std::vector<Book> &books, std::vector<Autho
 
     fbook.open ("database/books.in");
     if (!fbook.is_open()) std::cerr << "Error in opening the file" << std::endl;
+    else{
+        while(fbook.good()){
+            std::getline(fbook, title, ',');
+            std::getline(fbook, author_name, ',');
+            std::getline(fbook, publisher_name, ',');
 
-    while(!fbook.eof()){
-        std::getline(fbook, title, ',');
-        std::getline(fbook, author_name, ',');
-        std::getline(fbook, publisher_name, ',');
-
-        std::string aux;
-        std::getline(fbook, aux, ',');
-
-        price = std::stod(aux);
-
-        try{
+            std::string aux;
             std::getline(fbook, aux, ',');
-            genre = pairs.at(aux);
-        }catch(const std::out_of_range& e){
-            (void)e;
-            throw WrongGender();
+
+            price = std::stod(aux);
+
+            try{
+                std::getline(fbook, aux, ',');
+                genre = pairs.at(aux);
+            }catch(const std::out_of_range& e){
+                (void)e;
+                throw WrongGender();
+            }
+
+            std::getline(fbook, aux, '\n');
+            year = stoi(aux);
+
+            auto author = Author::get_authors_by_name(authors_list, {author_name}).front();
+
+            auto publisher = *std::find_if(publisher_list.begin(), publisher_list.end(), [publisher_name](auto publisher)
+            { return publisher_name == publisher.getName(); });
+
+            books.push_back(
+                    Book(title,
+                         author,
+                         publisher,
+                         price,
+                         genre,
+                         year
+                    )
+            );
         }
-
-        std::getline(fbook, aux, '\n');
-        year = stoi(aux);
-
-        auto author = Author::get_authors_by_name(authors_list, {author_name}).front();
-
-        auto publisher = *std::find_if(publisher_list.begin(), publisher_list.end(), [publisher_name](auto publisher)
-        { return publisher_name == publisher.getName(); });
-
-/*        try{
-            for(auto & i : books) i;
-        } catch (BookException &error) {
-            std::cout << error.what() << '\n';
-        }*/
-
-        books.push_back(
-                Book(title,
-                     author,
-                     publisher,
-                     price,
-                     genre,
-                     year
-                )
-                );
-//        std::cout << "Book added: " << title << std::endl;
     }
+
 //    for(auto & i : books) std::cout  << i << "\n";
 }
 
@@ -157,14 +157,13 @@ int main() {
     baba.add_to_cart(*carturesti.find("Jack si vrejul de fasole"));
     carturesti.add_client(baba);
 
-    carturesti.get_details(&ASMI);
-
     std::cout << "Totalul de plata pentru client: " << normal.get_total() << std::endl;
     std::cout << "Totalul de plata pentru student: " << de_la_poli.get_total() << std::endl;
     std::cout << "Totalul de plata pentru ONG: " << ASMI.get_total() << std::endl;
     std::cout << "Totalul de plata pentru pensionar: " <<baba.get_total() <<std::endl;
 
-    std::cout << "find_by_wrd\n";
+    carturesti.get_details(&ASMI);
+
     std::vector<Book> books_ = carturesti.find_by_word("ion");
     std::cout << "Cartile care contin sirul de caractere introdus sunt: \n";
     for(auto & i : books_) std::cout  << i << "\n";

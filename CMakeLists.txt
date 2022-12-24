@@ -41,9 +41,12 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/Author.cpp headers/Author.h src/AuthorException.cpp headers/AuthorException.h src/Book.cpp headers/Book.h
+        src/BookException.cpp headers/BookException.h src/Client.cpp headers/Client.h src/Library.cpp headers/Library.h
+        src/NGO.cpp headers/NGO.h src/Publisher.cpp headers/Publisher.h src/Regular.cpp headers/Regular.h
+        src/Retiree.cpp headers/Retiree.h src/Student.cpp headers/Student.h)
 
-###############################################################################
+############### ################################################################
 
 # target definitions
 
@@ -114,7 +117,7 @@ endif()
 
 # use SYSTEM so clang-tidy does not report warnings from these directories
 #target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
-#target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE headers)
 #target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
 #target_link_libraries(${PROJECT_NAME} <SomeLib>)
 
