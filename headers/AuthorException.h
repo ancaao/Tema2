@@ -9,6 +9,7 @@
 
 class AuthorException : public std::runtime_error {
 public:
+    AuthorException() = default;
     explicit AuthorException(const std::string &arg);
 };
 
