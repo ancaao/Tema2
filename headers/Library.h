@@ -59,8 +59,8 @@ public:
         auto it = begin(books);
 
         while (it != end(books)) {
+            std::cout << *it << std::endl;
             it = find_if(it, end(books), word_match_fn);
-
             if (it != end(books)) {
                 list.push_back(*it);
                 it++;
