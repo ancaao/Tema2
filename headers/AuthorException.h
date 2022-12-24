@@ -6,10 +6,10 @@
 #define MAIN_CPP_AUTHOREXCEPTION_H
 
 #include <stdexcept>
+#include <string>
 
 class AuthorException : public std::runtime_error {
 public:
-    AuthorException() = default;
     explicit AuthorException(const std::string &arg);
 };
 
