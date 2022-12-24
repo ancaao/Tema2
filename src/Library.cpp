@@ -48,6 +48,7 @@ void Library::get_details(Client* client){
     }
 
     std::cout<< "Valoare cumparaturilor este in valoare de " << client->get_total() << std::endl;
+    std::cout<< "end\n";
 }
 
 double Library::get_total_sales() {
